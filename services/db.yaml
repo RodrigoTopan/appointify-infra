@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: appointify
+spec:
+  type: ClusterIP
+  selector:
+    app: db
+  ports:
+  - port: 5432
+    name: db-service 
+    targetPort: 5432

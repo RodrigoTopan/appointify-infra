@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appointify-api
+  namespace: appointify
+spec:
+  type: LoadBalancer
+  selector:
+    app: appointify-api
+  ports:
+  - port: 8080
+    name: appointify-api-service 
+    targetPort: 8080
+    nodePort: 31004

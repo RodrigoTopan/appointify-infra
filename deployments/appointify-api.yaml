@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: appointify-api
+  name: appointify-api
+  namespace: appointify
+spec:
+  selector:
+    matchLabels:
+      app: appointify-api
+  template:
+    metadata:
+      labels:
+        app: appointify-api
+    spec:
+      containers:
+      - name: appointify-api
+        image: rodrigotopan/appointify-api:0.0.1-SNAPSHOT
+        env:
+            - name: DATASOURCE_URL
+              value: jdbc:postgresql://db:5432/postgres
+            - name: DATASOURCE_USERNAME
+              value: postgres
+            - name: DATASOURCE_PASSWORD
+              value: postgres
+            - name: JAVA_OPTS
+              value: "-Xms256m -Xmx512m"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          name: appointify-api
